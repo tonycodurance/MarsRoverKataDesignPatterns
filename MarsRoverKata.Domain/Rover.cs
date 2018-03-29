@@ -8,10 +8,12 @@ namespace MarsRoverKata.Domain
 
         private Coordinate coordinate = new Coordinate(0, 0);
         private readonly Navigator navigator;
+        private Grid grid;
 
-        public Rover(Navigator navigator)
+        public Rover(Navigator navigator, Grid grid)
         {
             this.navigator = navigator;
+            this.grid = grid;
         }
 
         public string Execute(string command)
@@ -30,7 +32,7 @@ namespace MarsRoverKata.Domain
 
                 if (character == 'M')
                 {
-                    coordinate = navigator.Move(direction, coordinate);
+                    coordinate = grid.NextCoordinateFor(direction, coordinate);
                 }
             }
             return coordinate.X + ":" + coordinate.Y + ":" + (char)direction;

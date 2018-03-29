@@ -6,9 +6,6 @@ namespace MarsRoverKata.Domain
 {
     public class Navigator
     {
-        private const int MaxHeight = 10;
-        private const int MaxWidth = 10;
-
         public Direction Right(Direction orientation)
         {
             var rightRotations = new List<Direction> { North, East, South, West };
@@ -39,32 +36,6 @@ namespace MarsRoverKata.Domain
             }
 
             return rotations.ElementAt(newOrientationIndex);
-        }
-
-        public Coordinate Move(Direction direction, Coordinate coordinate)
-        {
-            int y = coordinate.Y;
-            int x = coordinate.X;
-            if (direction == North)
-            {
-                y = (y + 1) % MaxHeight;
-            }
-            if (direction == East)
-            {
-                x = (x + 1) % MaxWidth;
-            }
-
-            if (direction == West)
-            {
-                x = (x > 0) ? x - 1 : MaxWidth - 1;
-            }
-
-            if (direction == South)
-            {
-                y = (y > 0) ? y - 1 : MaxWidth - 1;
-            }
-
-            return new Coordinate(x, y);
         }
     }
 }

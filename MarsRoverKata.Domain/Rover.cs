@@ -4,16 +4,16 @@ namespace MarsRoverKata.Domain
 {
     public class Rover
     {
-        private Direction direction = North;
+        private Direction _direction = North;
 
-        private Coordinate coordinate = new Coordinate(0, 0);
-        private readonly Navigator navigator;
-        private Grid grid;
+        private Coordinate _coordinate = new Coordinate(0, 0);
+        private readonly Navigator _navigator;
+        private readonly Grid _grid;
 
         public Rover(Navigator navigator, Grid grid)
         {
-            this.navigator = navigator;
-            this.grid = grid;
+            this._navigator = navigator;
+            this._grid = grid;
         }
 
         public string Execute(string command)
@@ -22,20 +22,20 @@ namespace MarsRoverKata.Domain
             {
                 if (character == 'R')
                 {
-                    direction = navigator.Right(direction);
+                    _direction = _navigator.Right(_direction);
                 }
 
                 if (character == 'L')
                 {
-                    direction = navigator.Left(direction);
+                    _direction = _navigator.Left(_direction);
                 }
 
                 if (character == 'M')
                 {
-                    coordinate = grid.NextCoordinateFor(direction, coordinate);
+                    _coordinate = _grid.NextCoordinateFor(_direction, _coordinate);
                 }
             }
-            return coordinate.X + ":" + coordinate.Y + ":" + (char)direction;
+            return _coordinate.X + ":" + _coordinate.Y + ":" + (char)_direction;
         }
     }
 }

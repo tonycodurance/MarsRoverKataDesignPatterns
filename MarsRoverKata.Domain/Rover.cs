@@ -8,7 +8,7 @@ namespace MarsRoverKata.Domain
         
         public Direction Direction { get; set; } = North;
         public Coordinate Coordinate { get; private set; } = new Coordinate(0, 0);
-        public IOrientationStateHandler OrientationStateHandler { get; set; }
+        public OrientationStateHandler OrientationStateHandler { get; set; }
 
         public Rover()
         {

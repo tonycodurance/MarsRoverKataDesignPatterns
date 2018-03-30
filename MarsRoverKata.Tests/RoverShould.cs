@@ -1,6 +1,5 @@
 ﻿using MarsRoverKata.Domain;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace MarsRoverKata.Tests
 {

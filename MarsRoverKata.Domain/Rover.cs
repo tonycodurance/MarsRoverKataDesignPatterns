@@ -4,38 +4,26 @@ namespace MarsRoverKata.Domain
 {
     public class Rover
     {
-        private Direction _direction = North;
-
-        private Coordinate _coordinate = new Coordinate(0, 0);
-        private readonly Navigator _navigator;
         private readonly Grid _grid;
+        
+        public Direction Direction { get; set; } = North;
+        public Coordinate Coordinate { get; private set; } = new Coordinate(0, 0);
+        public IOrientationStateHandler OrientationStateHandler { get; set; }
 
-        public Rover(Navigator navigator, Grid grid)
+        public Rover()
         {
-            this._navigator = navigator;
-            this._grid = grid;
+            OrientationStateHandler = new RightOrientationStateHandler();
+            _grid = new Grid();
         }
 
-        public string Execute(string command)
+        public void Rotate()
         {
-            foreach (var character in command)
-            {
-                if (character == 'R')
-                {
-                    _direction = _navigator.Right(_direction);
-                }
+            OrientationStateHandler.Handle(this);
+        }
 
-                if (character == 'L')
-                {
-                    _direction = _navigator.Left(_direction);
-                }
-
-                if (character == 'M')
-                {
-                    _coordinate = _grid.NextCoordinateFor(_direction, _coordinate);
-                }
-            }
-            return _coordinate.X + ":" + _coordinate.Y + ":" + (char)_direction;
+        public void Move()
+        {
+            Coordinate = _grid.NextCoordinateFor(Direction, Coordinate);
         }
     }
 }

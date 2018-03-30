@@ -4,22 +4,8 @@ using static MarsRoverKata.Domain.Direction;
 
 namespace MarsRoverKata.Domain
 {
-    public class Navigator
+    public class LeftOrientationStateHandler : IOrientationStateHandler
     {
-        public Direction Right(Direction orientation)
-        {
-            var rightRotations = new List<Direction> { North, East, South, West };
-
-            return Calculate(rightRotations, orientation);
-        }
-
-        public Direction Left(Direction orientation)
-        {
-            var leftRotations = new List<Direction> { North, West, South, East };
-
-            return Calculate(leftRotations, orientation);
-        }
-
         private Direction Calculate(List<Direction> rotations, Direction orientation)
         {
             var newOrientationIndex = 0;
@@ -36,6 +22,12 @@ namespace MarsRoverKata.Domain
             }
 
             return rotations.ElementAt(newOrientationIndex);
+        }
+
+        public void Handle(Rover rover)
+        {
+            var leftRotations = new List<Direction> { North, West, South, East };
+            rover.Direction = Calculate(leftRotations, rover.Direction);
         }
     }
 }

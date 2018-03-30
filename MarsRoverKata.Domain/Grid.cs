@@ -6,21 +6,11 @@ namespace MarsRoverKata.Domain
     {
         private const int MaxHeight = 10;
         private const int MaxWidth = 10;
-        private List<Coordinate> _obstacles = new List<Coordinate>();
-
-        public Grid(List<Coordinate> obstacles)
-        {
-            _obstacles = obstacles;
-        }
-
-        public Grid()
-        {
-        }
 
         public Coordinate NextCoordinateFor(Direction direction, Coordinate coordinate)
         {
-            int y = coordinate.Y;
-            int x = coordinate.X;
+            var y = coordinate.Y;
+            var x = coordinate.X;
             if (direction == Direction.North)
             {
                 y = (y + 1) % MaxHeight;
@@ -41,12 +31,6 @@ namespace MarsRoverKata.Domain
             }
 
             var newCoordinate = new Coordinate(x, y);
-            var obstacleIndex = _obstacles.FindIndex(obstacle => obstacle.X == x && obstacle.Y == y);
-
-            if (obstacleIndex >= 0)
-            {
-                return coordinate;
-            }
 
             return newCoordinate;
         }

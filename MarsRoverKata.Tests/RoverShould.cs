@@ -1,6 +1,6 @@
-﻿using MarsRoverKata.Domain;
+﻿using System.Collections.Generic;
+using MarsRoverKata.Domain;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace MarsRoverKata.Tests
 {
@@ -12,7 +12,7 @@ namespace MarsRoverKata.Tests
         [SetUp]
         public void SetUp()
         {
-            _rover = new Rover(new Navigator(), new Grid());
+            _rover = new Rover(new CommandsMapper());
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace MarsRoverKata.Tests
             {
                 new Coordinate(0, 4)
             };
-            var rover = new Rover(new Navigator(), new Grid(obstacles));
+            var rover = new Rover(new CommandsMapper(obstacles));
 
             Assert.AreEqual(expectedOutput, rover.Execute(inputCommand));
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using static MarsRoverKata.Domain.Direction;
 
 namespace MarsRoverKata.Domain
 {
@@ -6,11 +7,14 @@ namespace MarsRoverKata.Domain
     {
         private const int MaxHeight = 10;
         private const int MaxWidth = 10;
-        private List<Coordinate> _obstacles = new List<Coordinate>();
+        private readonly List<Coordinate> _obstacles = new List<Coordinate>();
 
         public Grid(List<Coordinate> obstacles)
         {
-            _obstacles = obstacles;
+            if (obstacles != null)
+            {
+                _obstacles = obstacles;    
+            }
         }
 
         public Grid()
@@ -19,23 +23,24 @@ namespace MarsRoverKata.Domain
 
         public Coordinate NextCoordinateFor(Direction direction, Coordinate coordinate)
         {
-            int y = coordinate.Y;
-            int x = coordinate.X;
-            if (direction == Direction.North)
+            var y = coordinate.Y;
+            var x = coordinate.X;
+            
+            if (direction == North)
             {
                 y = (y + 1) % MaxHeight;
             }
-            if (direction == Direction.East)
+            if (direction == East)
             {
                 x = (x + 1) % MaxWidth;
             }
 
-            if (direction == Direction.West)
+            if (direction == West)
             {
                 x = (x > 0) ? x - 1 : MaxWidth - 1;
             }
 
-            if (direction == Direction.South)
+            if (direction == South)
             {
                 y = (y > 0) ? y - 1 : MaxWidth - 1;
             }

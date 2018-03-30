@@ -23,6 +23,6 @@ namespace MarsRoverKata.Domain
             return rotations.ElementAt(newOrientationIndex);
         }
         
-        public abstract void Handle(Rover rover);
+        public abstract void Rotate(Rover rover);
     }
 }

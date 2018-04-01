@@ -8,7 +8,7 @@ namespace MarsRoverKata.Domain
         public override void Rotate(Rover rover)
         {
             var leftRotations = new List<Direction> { North, West, South, East };
-            rover.Direction = CalculateOrientation(leftRotations, rover.Direction);
+            rover.Bearing.Direction = CalculateOrientation(leftRotations, rover.Bearing.Direction);
         }
     }
 }
